@@ -26,8 +26,8 @@ const CartDetails = ({ product }) => {
 console.log('product.quantity',product.quantity);
 
     const dispatch = useAppDispatch()
-    const handleQuantity = (type: string, id: string) => {
-        const payload = { type, id }
+    const handleQuantity = (type: string, _id: string) => {
+        const payload = { type, _id }
         dispatch(updateQuantity(payload))
 
     }
@@ -48,7 +48,7 @@ console.log('product.quantity',product.quantity);
                         <Button onClick={() => handleQuantity('decrement', product._id)}>Mainus -</Button>
                     </div>
 
-                    <Button  >delete</Button>
+                    <Button>delete</Button>
                 </CardContent>
                 {/* <CardFooter className="flex justify-between">
         <Button>Add +</Button>

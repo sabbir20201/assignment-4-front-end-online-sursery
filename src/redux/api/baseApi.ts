@@ -38,6 +38,13 @@ export const baseApi = createApi({
       body: newProduct
     })
    }),
+   createOrder: builder.mutation({
+    query:(orderData)=>({
+      method: "POST",
+      url: "/checkout",
+      body: orderData
+    })
+   }),
    deleteProduct: builder.mutation({
     query:(id: string)=>({
       method: "DELETE",
@@ -56,6 +63,6 @@ export const baseApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetNurseryQuery, useGetProductByIdQuery , useCreateProductMutation, useDeleteProductMutation, useUpdateProductMutation} = baseApi
+export const { useGetNurseryQuery, useGetProductByIdQuery ,useCreateOrderMutation, useCreateProductMutation, useDeleteProductMutation, useUpdateProductMutation} = baseApi
 
 // http://localhost:5000/api/product

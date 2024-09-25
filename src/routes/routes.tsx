@@ -5,6 +5,7 @@ import AdminLayout from "@/mainLayout/adminLayout";
 import MainLayout from "@/mainLayout/MainLayout";
 import AddProduct from "@/pages/addProduct/AddProduct";
 import Cart from "@/pages/Cart/Cart";
+import Checkout from "@/pages/Cart/Checkout";
 import ErrorPage from "@/pages/errorPage/ErrorPage";
 import Home from "@/pages/home/Home";
 import AllProduct from "@/pages/product/AllProduct";
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
             {
                 path: "/cart",
                 element: <Cart></Cart>
+            },
+            {
+                path: "/checkout",
+                element:<Checkout></Checkout>
             }
         ]
     },

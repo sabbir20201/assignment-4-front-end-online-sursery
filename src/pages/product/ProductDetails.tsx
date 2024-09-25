@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { useGetProductByIdQuery } from "@/redux/api/baseApi";
-import { useParams } from "react-router-dom";
+import { addToCart } from "@/redux/features/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const ProductDetails = () => {
-
+    const dispatch = useAppDispatch();
     const { id} = useParams();
     const { data, isLoading } = useGetProductByIdQuery(id);
     if (isLoading) {
@@ -12,6 +14,12 @@ const ProductDetails = () => {
     }
     const { data: singleNursery } = data
 
+    const handleAddToCart = (product) => {
+        dispatch(addToCart(product))
+    
+        console.log('product from details',product);
+    
+    }
     return (
         <div>
             <div className="card lg:card-side bg-base-100 shadow-sm border rounded-sm">
@@ -25,7 +33,7 @@ const ProductDetails = () => {
                     <p>{singleNursery.description}</p>
                     <p>{singleNursery.price} BD</p>
                     <div className="card-actions">
-                    <Button className="w-full">Add To Cart</Button>
+                    <Button onClick={() => handleAddToCart(singleNursery)} className="w-full">Add To Cart</Button>
                     </div>
                 </div>
             </div>

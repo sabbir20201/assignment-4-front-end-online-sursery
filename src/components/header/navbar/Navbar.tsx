@@ -8,12 +8,12 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const product = useAppSelector((store)=> store.cart.products);
+  const {selectedItems} = useAppSelector((store)=> store.cart);
   const menuItems = [
     { label: "Home", path: "/" },
     { label: "ALL Product", path: "/allProduct" },
     { label: "Add A Product", path: "/addNursery" },
-    { label: `cart ${product?.length}`, path: "/cart" },
+    { label: `cart ${selectedItems}`, path: "/cart" },
     { label: "Dashboard", path: "/admin" }
   ]
 

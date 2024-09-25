@@ -45,7 +45,7 @@ const AdminLayout = () => {
 
   return (
     <div>
-      <Layout style={{height: 'vh'}}>
+      <Layout style={{height: '100vh'}}>
         <Sider
           breakpoint="lg"
           collapsedWidth="0"
@@ -61,9 +61,9 @@ const AdminLayout = () => {
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
         </Sider>
         <Layout>
-          
-          <Header style={{ padding: 0, background: colorBgContainer}}>
-            <h1>Dashboard</h1>
+        {/* colorBgContainer */}
+          <Header style={{ padding: 0, background: "skyblue"}}>
+            <h1 className='text-3xl text-bold'>Dashboard</h1>
           </Header>
           <Button
             type="text"
