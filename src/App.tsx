@@ -1,6 +1,6 @@
 
 import { Button } from './components/ui/button'
-import AdminLayout from './mainLayout/adminLayout'
+import AdminLayout from './mainLayout/AdminLayout'
 import MainLayout from './mainLayout/MainLayout'
 
 function App() {

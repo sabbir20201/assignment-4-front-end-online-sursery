@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,11 +13,23 @@ interface IFormInput {
     rating: number;
     category: string;
 }
+interface Product {
+    _id: string;
+    title: string;
+    description: string;
+    image: string;
+    category: string;
+    price: number;
+    availableQuantity: number;
+    quantity: number;
+    rating: number;
+    isDeleted: boolean;
+}
 const Checkout = () => {
     const [createOrder] = useCreateOrderMutation()
     const { selectedItems, totalPrice, products } = useAppSelector((store) => store.cart);
-    // const product = useAppSelector((store) => store.cart.products);
 
+    console.log("products  checkout=> ", products);
 
     const { register, handleSubmit } = useForm<IFormInput>()
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
@@ -33,21 +44,20 @@ const Checkout = () => {
                 totalPrice: totalPrice,
             }
             const result = await createOrder(orderData)
-            if(result.data.data._id){
+            if (result.data.data._id) {
                 toast.success('Order created successfully')
                 console.log("orderData", orderData);
                 console.log("result from backend =>", result);
                 console.log("result from id  =>", result.data.data._id);
             }
-           
+
         } catch (error) {
             console.log(error);
-
         }
     }
     return (
         <div className="grid justify-center pb-10 max-w-6xl">
-<Toaster position="top-right"></Toaster>
+            <Toaster position="top-right"></Toaster>
             <div className="">
                 <h1 className="font-bold text-2xl p-3 text-center">Checkout</h1>
 
@@ -63,20 +73,18 @@ const Checkout = () => {
                         </div>
                         <div>
                             <Label htmlFor="phone">phone</Label>
-                            <Input className="my-1"  required type="phone" {...register("phone")} />
+                            <Input className="my-1" required type="phone" {...register("phone")} />
                             <Label htmlFor="address">address</Label>
                             <Input className="my-1" required type="address" {...register("address")} />
                         </div>
                     </div>
                     <div className="border p-5">
                         <h1 className="font-semibold text-xl pb-2">Order summary</h1>
-                        <p>Product Name: {products.map((item, index) => <p key={item._id}>{index + 1}.{item.title}</p>)}</p>
+                        <p>Product Name: {products.map((item: Product, index:number) => <p key={item._id}>{index + 1}.{item.title}</p>)}</p>
                         <p>Quantity: {selectedItems}</p>
 
                         <p>Total Price :{totalPrice}</p>
                     </div>
-
-
                     <Button className="w-full my-1 max-w-96 bg-[#234e30]" type="submit">Proceed to payment</Button>
                 </form>
             </div>

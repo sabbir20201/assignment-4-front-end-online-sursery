@@ -8,7 +8,6 @@ const MainLayout = () => {
     return (
         <div className="grid mx-auto max-w-6xl">
            <Navbar></Navbar>
-
             <Outlet></Outlet>
             <Footer></Footer>
         </div>

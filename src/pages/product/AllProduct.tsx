@@ -1,5 +1,5 @@
 import { useGetNurseryQuery } from "@/redux/api/baseApi";
-import NurseryCard from "./nurseryCard";
+import NurseryCard from "./NurseryCard";
 import { TNursery } from "@/type";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -59,19 +59,15 @@ const AllProduct = () => {
                 }
             </div>
             <div className="grid justify-center mt-3">
-            {
-                location.pathname !== "/" && (
-                    filteredCategoryWiseNursery?.length > showItem && (
-                        <Button className="bg-[#15351e]" onClick={handleShowItem}>Show More</Button>
+                {
+                    location.pathname !== "/" && (
+                        filteredCategoryWiseNursery?.length > showItem && (
+                            <Button className="bg-[#15351e]" onClick={handleShowItem}>Show More</Button>
 
+                        )
                     )
-                )
-            }
+                }
             </div>
-        
-
-
-
         </div>
     );
 };

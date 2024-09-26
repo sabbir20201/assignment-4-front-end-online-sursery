@@ -7,12 +7,6 @@ import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { toast, Toaster } from 'react-hot-toast'
 
-// enum GenderEnum {
-//     female = "female",
-//     male = "male",
-//     other = "other",
-// }
-
 interface IFormInput {
     image: string;
     title: string;
@@ -22,6 +16,7 @@ interface IFormInput {
     availableQuantity: string;
     category: string;
 }
+
 const imag_HOSTING_KEY = "a9558b5d7cd6b8968b2f112eeb10ad96";
 const imag_HOSTING_API = `https://api.imgbb.com/1/upload?key=${imag_HOSTING_KEY}`;
 const CreateProduct = () => {
@@ -29,44 +24,41 @@ const CreateProduct = () => {
     const [CreateProduct] = useCreateProductMutation()
     const { refetch } = useGetNurseryQuery({})
 
+
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
 
 
         try {
+            const imageFile = { image: data.image[0] }
+            console.log(imageFile)
+            const res = await axios.post(imag_HOSTING_API, imageFile, {
+                headers: {
+                    'Content-type': 'multipart/form-data'
+                }
+            })
 
-            // const imageFile = { image: data.image[0] }
-            // console.log(imageFile)
-            // const res = await axios.post(imag_HOSTING_API, imageFile, {
-            //     headers: {
-            //         'Content-type': 'multipart/form-data'
-            //     }
-            // })
+            if (res.data.success) {
+                const nurseryData = {
+                    image: res.data.data.display_url,
+                    title: data.title,
+                    description: data.description,
+                    price: data.price,
+                    rating: data.rating,
+                    availableQuantity: data.availableQuantity,
+                    category: data.category,
+                }
 
-            // console.log("response image bb", res);
+                const result = await CreateProduct(nurseryData)
+                if (result?.data?.success) {
+                    toast.success('Product created Successfully', { duration: 4000 })
+                    await reset()
+                    await refetch()
+                } else {
+                    console.log('failed to create product');
 
-            // if (res.data.success) {
-            const nurseryData = {
-                // image: res.data.data.display_url,
-                title: data.title,
-                description: data.description,
-                price: data.price,
-                rating: data.rating,
-                availableQuantity: data.availableQuantity,
-                category: data.category,
+                }
+                console.log("result after nursery create", result);
             }
-
-            const result = await CreateProduct(nurseryData)
-            if (result?.data?.success) {
-                toast.success('Product created Successfully', { duration: 4000 })
-               await reset()
-                await refetch()
-            } else {
-                console.log('failed to create product');
-
-            }
-            console.log("result after nursery create", result);
-            // }
-
 
         } catch (error) {
             console.error(error);

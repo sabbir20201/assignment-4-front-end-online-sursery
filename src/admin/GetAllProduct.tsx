@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { useDeleteProductMutation, useGetNurseryQuery, useUpdateProductMutation } from '@/redux/api/baseApi';
+import { useDeleteProductMutation, useGetNurseryQuery } from '@/redux/api/baseApi';
 import { TNursery } from '@/type';
 // import { Item } from '@radix-ui/react-menubar';
 import {
@@ -13,32 +13,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-// import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import axios from "axios";
-import { useForm, SubmitHandler } from "react-hook-form"
-import CreateProduct from "./CreateProduct";
+
 import UpdateProduct from "./UpdateProduct";
 import toast, { Toaster } from "react-hot-toast";
 import SyncLoader from "react-spinners/ClipLoader"
-// enum GenderEnum {
-//     female = "female",
-//     male = "male",
-//     other = "other",
-// }
 
-interface IFormInput {
-  image: string;
-  title: string;
-  description: string;
-  price: number;
-  rating: number;
-  category: string;
-}
-// const imag_HOSTING_KEY = "a9558b5d7cd6b8968b2f112eeb10ad96";
-// const imag_HOSTING_API = `https://api.imgbb.com/1/upload?key=${imag_HOSTING_KEY}`;
+
+
 const GetAllProduct = () => {
   const [deleteProduct] = useDeleteProductMutation()
   const { data, isLoading, refetch } = useGetNurseryQuery({})
@@ -48,16 +29,15 @@ const GetAllProduct = () => {
       <p><SyncLoader></SyncLoader></p>
     )
   }
+
   const { data: nursery } = data
   const handleDelete = async (_id: string) => {
     try {
       const result = await deleteProduct(_id).unwrap()
-      if(result.data._id){
-        toast.success('Product deleted Successfully', {duration: 4000})
+      if (result.data._id) {
+        toast.success('Product deleted Successfully', { duration: 4000 })
         refetch()
       }
-
-      console.log('resulttt prodm delete', result.data);
     } catch (error) {
       console.log(error);
     }
@@ -102,28 +82,28 @@ const GetAllProduct = () => {
                     <div className='lg:flex'>
                       <div>
                         <th>
-                        <AlertDialog>
-                          <AlertDialogTrigger asChild>
-                            {/* <Button >Show Dialog</Button> */}
-                            <Button>Update</Button>
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              {/* <Button >Show Dialog</Button> */}
+                              <Button>Update</Button>
 
-                          </AlertDialogTrigger>
-                          <AlertDialogContent>
-                            <AlertDialogHeader>
-                              <AlertDialogTitle>Are you sure to delete this Product?</AlertDialogTitle>
-                              <AlertDialogDescription className="flex justify-center">
-                                <UpdateProduct id={item._id} item={item}></UpdateProduct>
-                              </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                              <AlertDialogCancel>Cancel</AlertDialogCancel>
-                              <AlertDialogAction >
-                              </AlertDialogAction>
-                            </AlertDialogFooter>
-                          </AlertDialogContent>
-                        </AlertDialog>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Update your product details</AlertDialogTitle>
+                                <AlertDialogDescription className=" justify-center">
+                                  <UpdateProduct id={item._id} item={item}></UpdateProduct>
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                {/* <AlertDialogAction >
+                                </AlertDialogAction> */}
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
 
-                      </th>
+                        </th>
                       </div>
                       <div>
                         <th>

@@ -1,12 +1,12 @@
 import AdminDashboard from "@/admin/AdminDashboard";
 import CreateProduct from "@/admin/CreateProduct";
 import GetAllProduct from "@/admin/GetAllProduct";
-import AdminLayout from "@/mainLayout/adminLayout";
+import AdminLayout from "@/mainLayout/AdminLayout";
 import MainLayout from "@/mainLayout/MainLayout";
-import AddProduct from "@/pages/addProduct/AddProduct";
 import Cart from "@/pages/Cart/Cart";
 import Checkout from "@/pages/Cart/Checkout";
 import ErrorPage from "@/pages/errorPage/ErrorPage";
+import Gallery from "@/pages/gallery/Gallery";
 import Home from "@/pages/home/Home";
 import AllProduct from "@/pages/product/AllProduct";
 import ProductDetails from "@/pages/product/ProductDetails";
@@ -31,12 +31,12 @@ const router = createBrowserRouter([
                 element: <ProductDetails></ProductDetails>
             },
             {
-                path: "/addNursery",
-                element: <AddProduct></AddProduct>
-            },
-            {
                 path: "/cart",
                 element: <Cart></Cart>
+            },
+            {
+                path: "/gallery",
+                element: <Gallery></Gallery>
             },
             {
                 path: "/checkout",

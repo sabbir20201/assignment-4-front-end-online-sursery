@@ -1,10 +1,11 @@
 
-import { AlertDialogAction } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useGetNurseryQuery, useUpdateProductMutation } from "@/redux/api/baseApi";
+import { TNursery } from "@/type";
+import React from "react";
 // import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form"
 import toast, { Toaster } from "react-hot-toast";
@@ -15,33 +16,30 @@ interface IFormInput {
     description: string;
     price: number;
     rating: number;
+    availableQuantity: string;
     category: string;
 }
-// const imag_HOSTING_KEY = "a9558b5d7cd6b8968b2f112eeb10ad96";
-// const imag_HOSTING_API = `https://api.imgbb.com/1/upload?key=${imag_HOSTING_KEY}`;
-const UpdateProduct = ({ id, item }) => {
+interface UpdateProductProps {
+    id: string;
+    item: TNursery;
+ 
+}
+
+
+const UpdateProduct: React.FC<UpdateProductProps> = ({ id, item }) => {
     const { register, handleSubmit } = useForm<IFormInput>()
     const [updateProduct] = useUpdateProductMutation()
     const { refetch } = useGetNurseryQuery({})
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
-
-            // const imageFile = { image: data.image[0] }
-            // console.log(imageFile)
-            // const res = await axios.post(imag_HOSTING_API, imageFile, {
-            //     headers: {
-            //         'Content-type': 'multipart/form-data'
-            //     }
-            // })
-            // console.log("response image bb", res);
-            // if (res.data.success) {
             const nurseryData = {
                 image: data.image,
                 title: data.title,
                 description: data.description,
                 price: data.price,
                 rating: data.rating,
+                availableQuantity: data.availableQuantity,
                 category: data.category,
             }
             const result = await updateProduct({ id, updatedData: nurseryData })
@@ -50,23 +48,17 @@ const UpdateProduct = ({ id, item }) => {
                 await refetch()
                 console.log("result after update", result);
             }
-            // }
+
         } catch (error) {
             console.log(error);
         }
     }
     return (
-        <div>
+        <div className="max-w-6xl">
             <Toaster position="top-right"></Toaster>
             <form onSubmit={handleSubmit(onSubmit)}>
-                {/* {item.image && (
-                    <div className="my-2">
-                        <img src={item.image} alt="Current Product" className="max-w-16 h-20" />
-                    </div>
-                )} */}
-                <Label htmlFor="image">image</Label>
+                <Label htmlFor="image">Put a image link</Label>
                 <Input defaultValue={item.image} className="my-1 max-w-96 " type=" " {...register("image")} />
-                {/* <Input className="my-1 max-w-96 " type="file" {...register("image")} /> */}
 
                 <Label htmlFor="">Title</Label>
                 <Input defaultValue={item.title} className="my-1 max-w-96 " type="title" {...register("title")} />
@@ -87,6 +79,11 @@ const UpdateProduct = ({ id, item }) => {
                 <Button type="submit" className="w-full my-1 max-w-96" >
                     Update the Product
                 </Button>
+
+
+
+
+
             </form>
         </div>
     );

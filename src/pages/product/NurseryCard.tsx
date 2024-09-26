@@ -24,7 +24,7 @@ const NurseryCard = ({ nursery }: { nursery: TNursery }) => {
                 </figure>
                 <div className="card-body items-center text-center p-2">
                     <h2 className="card-title">{nursery.title}</h2>
-                    <h2 className="card-title">stock in: {nursery.availableQuantity}</h2>
+                  
                     <p className="font-semibold">{nursery.price} BD | <span className="text-red-700 font-semibold">10% : discount </span></p>
                     
                     <div className="card-actions">

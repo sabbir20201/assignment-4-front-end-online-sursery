@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 // Define a service using a base URL and expected endpoints
 export const baseApi = createApi({
   reducerPath: 'pokemonApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://assignment-4-back-end.vercel.app/api' }),
   endpoints: (builder) => ({
    getNursery: builder.query({
     query: ()=>({
@@ -14,23 +14,11 @@ export const baseApi = createApi({
     })
    }),
    getProductById: builder.query({
-    query: (id: string)=>({
+    query: (id)=>({
       method: "GET",
       url: `/product/${id}`
     })
    }),
- 
-  //  uploadImage: builder.mutation({
-  //   query:(imageData)=>({
-  //     method: "POST",
-  //     url: "https://api.imgbb.com/1/upload",
-  //     body: imageData,
-  //     headers: {
-  //       "Content-Type": "multipart/form-data"
-  //     }
-
-  //   })
-  //  }),
    createProduct: builder.mutation({
     query:(newProduct)=>({
       method: "POST",
@@ -65,4 +53,4 @@ export const baseApi = createApi({
 // auto-generated based on the defined endpoints
 export const { useGetNurseryQuery, useGetProductByIdQuery ,useCreateOrderMutation, useCreateProductMutation, useDeleteProductMutation, useUpdateProductMutation} = baseApi
 
-// http://localhost:5000/api/product
+// https://assignment-4-back-end.vercel.app/api/product

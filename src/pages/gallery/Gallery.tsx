@@ -6,7 +6,6 @@ interface ImageItem {
     img: string;
     title: string;
 }
-
 const Gallery = () => {
     const images: ImageItem[] = [
         {

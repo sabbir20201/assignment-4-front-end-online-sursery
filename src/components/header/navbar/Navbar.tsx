@@ -13,7 +13,7 @@ const Navbar = () => {
   const menuItems = [
     { label: "Home", path: "/" },
     { label: "ALL Product", path: "/allProduct" },
-    { label: "Add A Product", path: "/addNursery" },
+    { label: "Gallery", path: "/gallery" },
     { label: "cart", path: "/cart" },
     { label: "Dashboard", path: "/admin" }
   ]
@@ -21,17 +21,6 @@ const Navbar = () => {
   return (
 
     <div className="py-2 rounded-sm">
-      {/* <Menubar className="justify-center text-2xl py-6">
-                {
-                    menuItems.map((item, index)=>(
-                        <MenubarMenu key={index}>
-                            <MenubarTrigger onClick={()=> navigate(item.path)}>
-                                {item.label}
-                            </MenubarTrigger>
-                        </MenubarMenu>
-                    ))
-                }
-            </Menubar> */} 
       <div className="navbar bg-[#234e30] rounded-sm">
         <div className="navbar-start">
           <div className="dropdown">
@@ -59,7 +48,7 @@ const Navbar = () => {
                                 {item.label}
                              {item.label === 'cart' ? (
                               <>
-                              <FaCartArrowDown className="" />{selectedItems} 
+                              <FaCartArrowDown size={30} className="" />{selectedItems} 
 
                               </>): ''
                              }
@@ -75,9 +64,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            {/* <li><a>Item 1</a></li>
-            <li><a>item 2</a></li>
-            <li><a>Item 3</a></li> */}
+      
             <Menubar className="justify-center text-2xl py-6 text-[#083214]">
                 {
                     menuItems.map((item, index)=>(

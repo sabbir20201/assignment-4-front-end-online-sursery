@@ -10,8 +10,9 @@ const OrderSummary = () => {
     const handleClearCart =()=>{
         dispatch(clearCart())
     }
+
     return (
-        <div className="border p-5">
+        <div className="border p-5 py-10">
             <h1 className="text-3xl font-bold text-green-800">Order summary</h1>
             <h1>Product Quantity: {selectedItems}</h1>
             <h1>Total price: {totalPrice}</h1>
@@ -19,7 +20,12 @@ const OrderSummary = () => {
             <h1>DiscountAmount: {discountAmount.toFixed(2)}</h1>
             <h1>Grand Total: {grandTotal} TK</h1>
             <Button className="my-3 bg-[#083214]" onClick={()=> handleClearCart()}>Clear Out</Button> <br />
+          {
+            totalPrice > 0 ? <>
             <Button className="bg-[#083214]" onClick={()=> navigate("/checkout")}>Proceed to Checkout</Button>
+            
+            </> : ""
+          }
         </div>
     );
 };
