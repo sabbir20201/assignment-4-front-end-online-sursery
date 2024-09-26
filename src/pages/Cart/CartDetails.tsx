@@ -9,6 +9,7 @@ import {
 
 import { useAppDispatch } from "@/redux/hooks"
 import { updateQuantity } from "@/redux/features/cartSlice"
+import toast, { Toaster } from "react-hot-toast";
 
 const CartDetails = ({ product }) => {
     console.log('product.quantity', product.quantity);
@@ -16,11 +17,14 @@ const CartDetails = ({ product }) => {
     const dispatch = useAppDispatch()
     const handleQuantity = (type: string, _id: string) => {
         const payload = { type, _id }
-        dispatch(updateQuantity(payload))
+        dispatch(updateQuantity(payload));
 
     }
     return (
         <div>
+            <div>
+                <Toaster position="top-right"></Toaster>
+            </div>
             <Card className="w-[350px]">
                 <CardHeader>
                     <CardTitle>  <p>{product.title}</p></CardTitle>

@@ -52,9 +52,6 @@ const GetAllProduct = () => {
     try {
       const result = await deleteProduct(_id).unwrap()
       refetch()
-      // if(result.success){
-      //   refetch();
-      // }
       console.log('resulttt', result.data.success);
     } catch (error) {
       console.log(error);
@@ -64,9 +61,7 @@ const GetAllProduct = () => {
   return (
     <div>
       <h1>All Nursery List</h1>
-
       <div>
-
         <div className="overflow-x-auto">
           <table className="table">
             <thead>
@@ -74,14 +69,12 @@ const GetAllProduct = () => {
                 <th>image</th>
                 <th>category</th>
                 <th className='lg:space-x-16'><span>update</span> <span className=''>delete</span></th>
-
               </tr>
             </thead>
             <tbody>
               {
                 nursery?.map((item: TNursery) => (
-                  <tr>
-
+                  <tr key={item._id}>
                     <td>
                       <div className="lg:flex items-center gap-3">
                         <div className="avatar">
@@ -99,12 +92,9 @@ const GetAllProduct = () => {
                     </td>
                     <td>
                       {item.category}
-
                     </td>
                     <div className='lg:flex'>
                       <div><th>
-
-
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
                             {/* <Button >Show Dialog</Button> */}
@@ -121,9 +111,7 @@ const GetAllProduct = () => {
                             <AlertDialogFooter>
                               <AlertDialogCancel>Cancel</AlertDialogCancel>
                               <AlertDialogAction >
-
                               </AlertDialogAction>
-
                             </AlertDialogFooter>
                           </AlertDialogContent>
                         </AlertDialog>
@@ -150,22 +138,13 @@ const GetAllProduct = () => {
                               </AlertDialogFooter>
                             </AlertDialogContent>
                           </AlertDialog>
-
                         </th>
                       </div>
-
-
                     </div>
-
-
                   </tr>
                 ))
               }
-
-
             </tbody>
-
-
           </table>
         </div>
       </div>

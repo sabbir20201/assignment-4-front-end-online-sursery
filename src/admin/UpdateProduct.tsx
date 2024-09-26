@@ -77,11 +77,11 @@ const UpdateProduct = ({ id, item }) => {
 
                 <Label htmlFor="description">description</Label>
                 <Textarea defaultValue={item.description} className="my-1 max-w-96" {...register("description")} />
-             
+
 
                 <Button type="submit" className="w-full my-1 max-w-96" >
-                        Update the Product
-                    </Button>
+                    Update the Product
+                </Button>
             </form>
         </div>
     );

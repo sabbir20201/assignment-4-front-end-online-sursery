@@ -9,7 +9,8 @@ const initialState = {
     totalPrice: 0,
     discountRate: 0.1,
     discountAmount: 0,
-    grandTotal: 0
+    grandTotal: 0,
+    message: ''
 }
 
 export const cartSlice = createSlice({
@@ -17,6 +18,10 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action) => {
+            // const product = action.payload;
+            // const availableQuantity = product.availableQuantity;
+            // console.log(availableQuantity);
+
             const isExists = state.products.find((product: { _id: any }) => product._id === action.payload._id)
             if (!isExists) {
                 state.products.push({ ...action.payload, quantity: 1 })
@@ -31,17 +36,24 @@ export const cartSlice = createSlice({
             state.grandTotal = state.totalPrice - state.discountAmount
 
         },
-        updateQuantity: (state: any, action) => {
-            const products = state.products.map((product: any) => {
-                if (product._id === action.payload._id) {
-                    if (action.payload.type === 'increment') {
-                        product.quantity += 1;
-                    } else if (action.payload.type === 'decrement') {
-                        product.quantity -= 1;
+        updateQuantity: (state, action) => {
+            const productTOUpdate = state.products.find((product: any) => product._id === action.payload._id)
+            if (productTOUpdate) {
+                if (action.payload.type === 'increment') {
+                    const availableQuantity = productTOUpdate.availableQuantity;
+                    if (productTOUpdate.quantity < availableQuantity) {
+                        productTOUpdate.quantity += 1;
+        
+                    }else{
+                       state.message = 'Product Is limited'
+                    }
+                }else if(action.payload.type === 'decrement'){
+                    if(productTOUpdate.quantity > 0){
+                        productTOUpdate.quantity -= 1
+                       
                     }
                 }
-                return product
-            })
+            }
             state.selectedItems = state.products.reduce((total: number, product: any) => {
                 return Number(total + product.quantity)
             }, 0)
@@ -50,14 +62,16 @@ export const cartSlice = createSlice({
             }, 0)
             state.discountAmount = state.totalPrice * state.discountRate
             state.grandTotal = state.totalPrice - state.discountAmount
+       
+
         },
-        clearCart: (state)=>{
-            state.products= [];
-            state.totalPrice= 0;
-            state.selectedItems= 0;
-            state.discountRate=0;
-            state.discountAmount=0;
-            state.grandTotal=0
+        clearCart: (state) => {
+            state.products = [];
+            state.totalPrice = 0;
+            state.selectedItems = 0;
+            state.discountRate = 0;
+            state.discountAmount = 0;
+            state.grandTotal = 0
         }
 
 

@@ -6,5 +6,6 @@ export type TNursery = {
     price: number;
     rating: number;
     category: string;
+    availableQuantity: string
     isDeleted: boolean;
 } 

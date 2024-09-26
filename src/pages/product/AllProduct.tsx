@@ -3,7 +3,19 @@ import NurseryCard from "./nurseryCard";
 import { TNursery } from "@/type";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+// new 
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
+
+
+// end 
 const AllProduct = () => {
 
     const { data, isLoading } = useGetNurseryQuery({})
@@ -26,6 +38,18 @@ const AllProduct = () => {
     return (
         <div className="my-12">
             <div className="grid justify-center">
+                <DropdownMenu>
+                    <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                        <DropdownMenuItem>Billing</DropdownMenuItem>
+                        <DropdownMenuItem>Team</DropdownMenuItem>
+                        <DropdownMenuItem>Subscription</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+
                 <Input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="max-w-56 mb-3" placeholder="search" />
             </div>
             <h1 className="text-3xl text-[#195529] font-bold text-center py-5">All Nursery</h1>
