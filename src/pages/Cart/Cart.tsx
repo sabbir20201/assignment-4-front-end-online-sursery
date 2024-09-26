@@ -1,6 +1,7 @@
 import { useAppSelector } from "@/redux/hooks";
 import CartDetails from "./CartDetails";
 import OrderSummary from "./OrderSummary";
+import { Key } from "react";
 
 
 const Cart = () => {
@@ -13,7 +14,7 @@ const Cart = () => {
             <div className="flex justify-around">
             <div>
                 {
-                    product?.map((product) => <CartDetails key={product._id} product={product}></CartDetails>)
+                    product?.map((product: { _id: Key | null | undefined; }) => <CartDetails key={product._id} product={product}></CartDetails>)
                 }
             </div>
             <OrderSummary></OrderSummary>

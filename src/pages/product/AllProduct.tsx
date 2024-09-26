@@ -1,15 +1,9 @@
 import { useGetNurseryQuery } from "@/redux/api/baseApi";
 import NurseryCard from "./nurseryCard";
 import { TNursery } from "@/type";
-
 import { Input } from "@/components/ui/input";
-
 import { useState } from "react";
-// interface IFormInput {
 
-//     description: string;
-
-// }
 const AllProduct = () => {
 
     const { data, isLoading } = useGetNurseryQuery({})

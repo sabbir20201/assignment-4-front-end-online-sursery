@@ -70,6 +70,3 @@ export const cartSlice = createSlice({
 export const { addToCart, updateQuantity, clearCart } = cartSlice.actions
 export default cartSlice.reducer
 
-// state.products.reduce((total:number, product:any) => {
-//     return Number(total + product.quantity)
-// }, 0)
