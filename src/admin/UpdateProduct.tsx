@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useGetNurseryQuery, useUpdateProductMutation } from "@/redux/api/baseApi";
 // import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form"
+import toast, { Toaster } from "react-hot-toast";
 
 interface IFormInput {
     image: string;
@@ -44,8 +45,11 @@ const UpdateProduct = ({ id, item }) => {
                 category: data.category,
             }
             const result = await updateProduct({ id, updatedData: nurseryData })
-            await refetch()
-            console.log("result after create", result);
+            if (result.data.data._id) {
+                toast.success('Product updated Successfully', { duration: 4000 })
+                await refetch()
+                console.log("result after update", result);
+            }
             // }
         } catch (error) {
             console.log(error);
@@ -53,6 +57,7 @@ const UpdateProduct = ({ id, item }) => {
     }
     return (
         <div>
+            <Toaster position="top-right"></Toaster>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {/* {item.image && (
                     <div className="my-2">

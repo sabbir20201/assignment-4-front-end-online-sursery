@@ -62,8 +62,8 @@ const AdminLayout = () => {
         </Sider>
         <Layout>
         {/* colorBgContainer */}
-          <Header style={{ padding: 0, background: "skyblue"}}>
-            <h1 className='text-3xl text-bold'>Dashboard</h1>
+          <Header style={{ padding: 0, background: "#234e30"}}>
+            <h1 className='text-3xl text-bold text-white'>Dashboard</h1>
           </Header>
           <Button
             type="text"

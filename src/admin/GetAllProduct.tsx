@@ -21,7 +21,8 @@ import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form"
 import CreateProduct from "./CreateProduct";
 import UpdateProduct from "./UpdateProduct";
-
+import toast, { Toaster } from "react-hot-toast";
+import SyncLoader from "react-spinners/ClipLoader"
 // enum GenderEnum {
 //     female = "female",
 //     male = "male",
@@ -44,15 +45,19 @@ const GetAllProduct = () => {
 
   if (isLoading) {
     return (
-      <p>Loading...</p>
+      <p><SyncLoader></SyncLoader></p>
     )
   }
   const { data: nursery } = data
   const handleDelete = async (_id: string) => {
     try {
       const result = await deleteProduct(_id).unwrap()
-      refetch()
-      console.log('resulttt', result.data.success);
+      if(result.data._id){
+        toast.success('Product deleted Successfully', {duration: 4000})
+        refetch()
+      }
+
+      console.log('resulttt prodm delete', result.data);
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +65,8 @@ const GetAllProduct = () => {
 
   return (
     <div>
-      <h1>All Nursery List</h1>
+      <Toaster position="top-right"></Toaster>
+      <h1 className="text-2xl font-bold">Total Nursery {nursery?.length} </h1>
       <div>
         <div className="overflow-x-auto">
           <table className="table">
@@ -94,7 +100,8 @@ const GetAllProduct = () => {
                       {item.category}
                     </td>
                     <div className='lg:flex'>
-                      <div><th>
+                      <div>
+                        <th>
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
                             {/* <Button >Show Dialog</Button> */}
@@ -116,7 +123,8 @@ const GetAllProduct = () => {
                           </AlertDialogContent>
                         </AlertDialog>
 
-                      </th></div>
+                      </th>
+                      </div>
                       <div>
                         <th>
                           <AlertDialog>

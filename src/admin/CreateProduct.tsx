@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCreateProductMutation, useGetNurseryQuery } from "@/redux/api/baseApi";
 import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form"
-import {toast, Toaster} from 'react-hot-toast'
+import { toast, Toaster } from 'react-hot-toast'
 
 // enum GenderEnum {
 //     female = "female",
@@ -25,7 +25,7 @@ interface IFormInput {
 const imag_HOSTING_KEY = "a9558b5d7cd6b8968b2f112eeb10ad96";
 const imag_HOSTING_API = `https://api.imgbb.com/1/upload?key=${imag_HOSTING_KEY}`;
 const CreateProduct = () => {
-    const { register, handleSubmit } = useForm<IFormInput>()
+    const { register, handleSubmit, reset } = useForm<IFormInput>()
     const [CreateProduct] = useCreateProductMutation()
     const { refetch } = useGetNurseryQuery({})
 
@@ -56,10 +56,14 @@ const CreateProduct = () => {
             }
 
             const result = await CreateProduct(nurseryData)
-            if (result.data.success) {
-                toast.success('Product created Successfully', {duration: 4000})
-                    await refetch()
-                }
+            if (result?.data?.success) {
+                toast.success('Product created Successfully', { duration: 4000 })
+               await reset()
+                await refetch()
+            } else {
+                console.log('failed to create product');
+
+            }
             console.log("result after nursery create", result);
             // }
 

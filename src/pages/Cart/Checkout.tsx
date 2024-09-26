@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { useCreateOrderMutation } from "@/redux/api/baseApi";
 import { useAppSelector } from "@/redux/hooks";
 import { useForm, SubmitHandler } from "react-hook-form"
+import toast, { Toaster } from "react-hot-toast";
 interface IFormInput {
     name: string;
     email: string;
@@ -32,8 +33,13 @@ const Checkout = () => {
                 totalPrice: totalPrice,
             }
             const result = await createOrder(orderData)
-            console.log("orderData", orderData);
-            console.log("result from backend =>", result);
+            if(result.data.data._id){
+                toast.success('Order created successfully')
+                console.log("orderData", orderData);
+                console.log("result from backend =>", result);
+                console.log("result from id  =>", result.data.data._id);
+            }
+           
         } catch (error) {
             console.log(error);
 
@@ -41,7 +47,7 @@ const Checkout = () => {
     }
     return (
         <div className="grid justify-center pb-10 max-w-6xl">
-
+<Toaster position="top-right"></Toaster>
             <div className="">
                 <h1 className="font-bold text-2xl p-3 text-center">Checkout</h1>
 
@@ -50,16 +56,16 @@ const Checkout = () => {
                     <div className="flex gap-5 pt-5 mb-5 max-w-6xl">
                         <div>
                             <Label htmlFor="name">name</Label>
-                            <Input className="my-1" type="name" {...register("name")} />
+                            <Input className="my-1" required type="name" {...register("name")} />
 
                             <Label htmlFor="">email</Label>
-                            <Input className="my-1" type="email" {...register("email")} />
+                            <Input className="my-1" required type="email" {...register("email")} />
                         </div>
                         <div>
                             <Label htmlFor="phone">phone</Label>
-                            <Input className="my-1" type="phone" {...register("phone")} />
+                            <Input className="my-1"  required type="phone" {...register("phone")} />
                             <Label htmlFor="address">address</Label>
-                            <Input className="my-1" type="address" {...register("address")} />
+                            <Input className="my-1" required type="address" {...register("address")} />
                         </div>
                     </div>
                     <div className="border p-5">
@@ -71,7 +77,7 @@ const Checkout = () => {
                     </div>
 
 
-                    <Button className="w-full my-1 max-w-96" type="submit">Proceed to payment</Button>
+                    <Button className="w-full my-1 max-w-96 bg-[#234e30]" type="submit">Proceed to payment</Button>
                 </form>
             </div>
 

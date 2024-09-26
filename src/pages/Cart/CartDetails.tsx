@@ -27,17 +27,17 @@ const CartDetails = ({ product }) => {
             </div>
             <Card className="w-[350px]">
                 <CardHeader>
-                    <CardTitle>  <p>{product.title}</p></CardTitle>
-                    <CardTitle>  <p>{product.price}</p></CardTitle>
-                    <CardDescription>Deploy your new project in one-click.</CardDescription>
+                    <CardTitle className="text-xl">  <p>Name: {product.title}</p></CardTitle>
+                    <CardTitle className="text-xl"> <p>Price: {product.price}</p></CardTitle>
+                    {/* <CardDescription>Deploy your new project in one-click.</CardDescription> */}
                 </CardHeader>
                 <CardContent>
-                    <div className="flex">
+                    <div className="flex gap-5">
                         <Button className="bg-[#083214]" onClick={() => handleQuantity('increment', product._id)}>Add +</Button>
-                        <p>{product.quantity}</p>
+                        <p className="text-xl font-bold">{product.quantity}</p>
                         <Button className="bg-[#083214]" onClick={() => handleQuantity('decrement', product._id)}>Mainus -</Button>
                     </div>
-                    <Button>delete</Button>
+                    {/* <Button>delete</Button> */}
                 </CardContent>
             </Card>
         </div>
