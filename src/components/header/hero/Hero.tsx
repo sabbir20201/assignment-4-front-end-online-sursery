@@ -16,10 +16,9 @@ const Hero = () => {
         Autoplay({ delay: 3000, stopOnInteraction: true })
     )
     const images = [
-        'https://images.unsplash.com/photo-1712496587611-c4750b815998?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1616068527635-95897b8a5555?q=80&w=1314&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1616068527635-95897b8a5555?q=80&w=1314&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        
+        'https://nurseryplantsbd.com/wp-content/uploads/2022/02/food.webp',
+        'https://nurseryplantsbd.com/wp-content/uploads/2022/02/collection.webp',
+        'https://nurseryplantsbd.com/wp-content/uploads/2022/02/food.webp',
     ]
     return (
         <div className="max-w-6xl">
@@ -34,10 +33,10 @@ const Hero = () => {
                         <CarouselItem key={index}>
                             <div className="">
                                 <Card className="py-5">
-                                    <CardContent className="flex h-[600px] items-center justify-center">
+                                    <CardContent className="flex items-center py-5 px-0 justify-center">
                                         {/* <span className="text-4xl font-semibold">{index + 1}</span> */}
                                         <img className="max-w-full" src={src} alt="" />
-                                    
+
                                     </CardContent>
                                 </Card>
                             </div>
@@ -47,7 +46,7 @@ const Hero = () => {
                 <CarouselPrevious className="lg:overflow-hidden hidden lg:block" />
                 <CarouselNext className="lg:overflow-hidden hidden lg:bl" />
             </Carousel>
-    
+
 
         </div>
     );

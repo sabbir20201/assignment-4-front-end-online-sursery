@@ -18,8 +18,8 @@ const OrderSummary = () => {
             <h1>DiscountRate: {discountRate}</h1>
             <h1>DiscountAmount: {discountAmount.toFixed(2)}</h1>
             <h1>Grand Total: {grandTotal} TK</h1>
-            <Button className="my-3" onClick={()=> handleClearCart()}>Clear Out</Button> <br />
-            <Button onClick={()=> navigate("/checkout")}>Proceed to Checkout</Button>
+            <Button className="my-3 bg-[#083214]" onClick={()=> handleClearCart()}>Clear Out</Button> <br />
+            <Button className="bg-[#083214]" onClick={()=> navigate("/checkout")}>Proceed to Checkout</Button>
         </div>
     );
 };

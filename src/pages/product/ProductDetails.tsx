@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { useGetProductByIdQuery } from "@/redux/api/baseApi";
 import { addToCart } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 
 
 const ProductDetails = () => {
@@ -14,7 +15,7 @@ const ProductDetails = () => {
     }
     const { data: singleNursery } = data
 
-    const handleAddToCart = (product) => {
+    const handleAddToCart = (product: any) => {
         dispatch(addToCart(product))
     
         console.log('product from details',product);
@@ -33,7 +34,7 @@ const ProductDetails = () => {
                     <p>{singleNursery.description}</p>
                     <p>{singleNursery.price} BD</p>
                     <div className="card-actions">
-                    <Button onClick={() => handleAddToCart(singleNursery)} className="w-full">Add To Cart</Button>
+                    <Button onClick={() => handleAddToCart(singleNursery)} className="w-full bg-[#083214]">Add To Cart</Button>
                     </div>
                 </div>
             </div>
